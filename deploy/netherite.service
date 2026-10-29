@@ -1,0 +1,31 @@
+# /etc/systemd/system/netherite.service
+#   sudo useradd --system --home /opt/netherite-notes --shell /usr/sbin/nologin netherite
+#   sudo chown -R netherite:netherite /opt/netherite-notes
+#   sudo systemctl daemon-reload && sudo systemctl enable --now netherite
+[Unit]
+Description=Netherite Notes
+After=network.target
+
+[Service]
+Type=simple
+User=netherite
+Group=netherite
+WorkingDirectory=/opt/netherite-notes
+# The app reads /opt/netherite-notes/.env itself; NODE_ENV is production by default but stated here for clarity.
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+RestartSec=3
+
+# Sandboxing: the process may only write inside the app directory (database + backups)
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/netherite-notes
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,6 @@
+# Caddy obtains and renews TLS certificates automatically and proxies WebSockets without extra config.
+# Set TRUST_PROXY=1 in .env so rate limits see real client IPs, and APP_URL=https://notes.example.com.
+notes.example.com {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:20100
+}
