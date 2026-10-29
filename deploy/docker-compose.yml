@@ -1,0 +1,17 @@
+# Run from the repository root:   docker compose -f deploy/docker-compose.yml up -d --build
+# Put secrets in ./.env (copy .env.example). The database and its backups live in the "netherite-data" volume.
+services:
+  netherite:
+    build: ..
+    image: netherite-notes:local
+    restart: unless-stopped
+    env_file: ../.env
+    environment:
+      DB_PATH: /data/obsidian.db
+      TRUST_PROXY: "1"            # remove if you publish the port directly instead of using a reverse proxy
+    volumes:
+      - netherite-data:/data
+    ports:
+      - "127.0.0.1:20100:20100"   # reach it through your reverse proxy (see deploy/Caddyfile.example)
+volumes:
+  netherite-data:
