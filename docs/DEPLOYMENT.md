@@ -2,6 +2,10 @@
 
 One Node.js process serves the web app, the REST API and the WebSocket on a single port (default 20100) and stores everything in one SQLite file. Run it behind a TLS-terminating reverse proxy.
 
+## Requirements
+
+Node.js 22+. On Linux the prebuilt `sqlite3` binary needs **glibc 2.38 or newer** (Ubuntu 24.04+, Debian 13+, Fedora 39+). On older distributions (Ubuntu 22.04, Debian 12) `npm ci` falls back to compiling from source if `python3`, `make` and `g++` are installed — or use the Docker image, which is based on Debian 13.
+
 ## 1. Configure
 
 ```bash
@@ -35,7 +39,7 @@ docker compose -f deploy/docker-compose.yml up -d --build
 ```
 The database and its backups live in the `netherite-data` volume (`/data`). The image runs as a non-root user and has a built-in health check against `/api/v1/health`.
 
-> The Dockerfile and compose file were written to the same layout as the tested production install (`npm ci --omit=dev` + `dist/`) but have not been built in CI yet — run a build once and check `docker compose ps` shows *healthy*.
+> Tested: the image builds, runs as the non-root `node` user, reports *healthy*, applies migrations on first start and keeps data across restarts.
 
 ### Create the first admin
 ```bash

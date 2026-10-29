@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ---- build: compile the client (Vite + Tailwind) and the service worker ----
-FROM node:22-bookworm-slim AS build
+FROM node:22-trixie-slim AS build
 WORKDIR /app
 # compilers are only needed if a native module (sqlite3, bcrypt) has no prebuilt binary for this platform
 RUN apt-get update && apt-get install -y --no-install-recommends python3 make g++ && rm -rf /var/lib/apt/lists/*
@@ -11,7 +11,7 @@ COPY . .
 RUN npm run build && npm prune --omit=dev
 
 # ---- runtime: production dependencies + built client + server only ----
-FROM node:22-bookworm-slim
+FROM node:22-trixie-slim
 ENV NODE_ENV=production \
     PORT=20100 \
     HOST=0.0.0.0 \
