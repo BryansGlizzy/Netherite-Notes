@@ -81,6 +81,7 @@ TLS, reverse proxy, systemd and backups are covered in [docs/DEPLOYMENT.md](docs
 | [docs/Context.md](docs/Context.md) | Product scope, features and tech stack |
 | [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | Running it for real |
 | [docs/UPGRADING.md](docs/UPGRADING.md) | Upgrade and rollback procedure |
+| [docs/PLANNED.md](docs/PLANNED.md) | Roadmap: features agreed but not built yet |
 | [SECURITY.md](docs/SECURITY.md) | Reporting vulnerabilities, security model |
 
 ## Development
