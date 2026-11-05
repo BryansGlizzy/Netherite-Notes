@@ -40,7 +40,7 @@
     "@eslint/js": "^9.39.5",
     "@tailwindcss/typography": "^0.5.20",
     "@types/d3": "^7.4.3",
-    "@types/node": "^22.10.0",
+    "@types/node": "^26.6.6",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@vitejs/plugin-react": "^5.2.0",
